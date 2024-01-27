@@ -12,6 +12,7 @@ const addTodo = () => {
   todos.value.push({
     content: input_content.value,
     category: input_category.value,
+    done: false,
   })
 
   input_content.value = ''
@@ -36,32 +37,44 @@ const addTodo = () => {
     <h3> CREATE A TODO</h3>
     <form @submit.prevent="addTodo">
       <h4> Whats on your todo list? </h4>
-      <input type ="text" placeholder="e'g, Make a video" v-model="input_content" />
+      <input type ="text" placeholder="e.g, Make a video" v-model="input_content" />
       <!-- {{ input_content }} -->
 
 
       <h4>Pick a Category</h4>
       <div class="options">
         <label> 
-          <input type="radio" name = "Category" value="Business" v-model="input_category" />
+          <input type="radio" name = "category" value="Business" v-model="input_category" />
         <span class="bubble business" ></span>
         <div>Business</div>
         </label>
 
         <label> 
-          <input type="radio" name = "Category" value="Personal" v-model="input_category" />
+          <input type="radio" name = "category" value="Personal" v-model="input_category" />
         <span class="bubble personal" ></span>
         <div>Personal</div>
         </label>
-        
+
         <!-- {{ input_category }} -->
 
       </div>
-
+        <input type ="submit" value ="Add Todo" />
     </form>
   </section>
 
   <section class="todo-list">
+    <div class="list">`
+        <div v-for="todo in todos" :class ="`todo-item ${todo.done ? 'done' : 'not-done'}`" :key="todo">  
+        <label>
+          <input type="checkbox"  v-model="todo.done" />
+          <span :class="`bubble ${todo.category}`"></span>
+        </label>
+        <div class ="todo-content">
+          <input type="text" v-model="todo.content"/>
+        </div>
+        </div>
+    </div>   
+
 
   </section>
 </main>
