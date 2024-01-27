@@ -22,6 +22,12 @@ const addTodo = () => {
 
 
 }
+
+const removeTodo = (todo) => {
+  todos.value = todos.value.filter(t => t !== todo)
+
+}
+
 </script>
 
 <template>
@@ -44,13 +50,13 @@ const addTodo = () => {
       <h4>Pick a Category</h4>
       <div class="options">
         <label> 
-          <input type="radio" name = "category" value="Business" v-model="input_category" />
+        <input type="radio" name = "category" value="business" v-model="input_category" />
         <span class="bubble business" ></span>
         <div>Business</div>
         </label>
 
         <label> 
-          <input type="radio" name = "category" value="Personal" v-model="input_category" />
+        <input type="radio" name = "category" value="personal" v-model="input_category" />
         <span class="bubble personal" ></span>
         <div>Personal</div>
         </label>
@@ -71,6 +77,9 @@ const addTodo = () => {
         </label>
         <div class ="todo-content">
           <input type="text" v-model="todo.content"/>
+        </div>
+        <div class="actions">
+          <button class="delete" @click = "removeTodo(todo)">Delete</button>
         </div>
         </div>
     </div>   
